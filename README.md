@@ -13,13 +13,16 @@ and see the associated notebooks for a simple overview.
 Available soon:
 - extension to Riemannian manifolds
 
-
+## How to run
 Update 2015-10-21: 2D examples in the paper has been added. 
 ```julia
 julia> include("Grids.jl")
 julia> include("DynamicOT.jl")
 julia> using Images, DynamicOT
-julia> p0=data(float(imread("p0.png")));
-julia> p1=data(float(imread("p1.png")));
-julia> result=solveGeodesic(ot0,ot1,6);
+julia> p0=1-data(float(imread("p0.png")));
+julia> p1=1-data(float(imread("p1.png")));
+julia> T=10 # time ticks
+julia> result=solveGeodesic(p0,p1,T);
+julia> interp=max(0,1-reshape(result[1].ρ[T/2+1,:,:],size(p0)));
+julia> imwrite(grayim(interp3), "pmid.png")
 ```

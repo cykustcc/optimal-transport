@@ -15,3 +15,11 @@ Available soon:
 
 
 Update 2015-10-21: 2D examples in the paper has been added. 
+```julia
+julia> include("Grids.jl")
+julia> include("DynamicOT.jl")
+julia> using Images, DynamicOT
+julia> p0=data(float(imread("p0.png")));
+julia> p1=data(float(imread("p1.png")));
+julia> result=solveGeodesic(ot0,ot1,6);
+```

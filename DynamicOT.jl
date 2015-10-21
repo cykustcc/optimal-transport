@@ -187,8 +187,8 @@ function poisson!(f::Array{Float64}, lengths::Array{Float64},
 	source ? (D -= 1) :	(D[1] = 1)
 
 	if isequal(plan,"none") | !isequal(iplan,"none")
-			plan  = v -> FFTW.r2r!(v,FFTW.REDFT10,[1:d]) #DCT 10
-			iplan = v -> FFTW.r2r!(v,FFTW.REDFT01,[1:d]) #iDCT 01
+			plan  = v -> FFTW.r2r!(v,FFTW.REDFT10,[1:d;]) #DCT 10
+			iplan = v -> FFTW.r2r!(v,FFTW.REDFT01,[1:d;]) #iDCT 01
 	end
 
   plan(f) #on place
@@ -410,9 +410,9 @@ function solveGeodesic(ρ_0, ρ_1, T;
 
   # planning/ initialisation
 	plan  = FFTW.plan_r2r!(zeros(cdim),
-					FFTW.REDFT10, [1:length(cdim)])
+					FFTW.REDFT10, [1:length(cdim);])
 	iplan = FFTW.plan_r2r!(zeros(cdim),
-					FFTW.REDFT01, [1:length(cdim)])
+					FFTW.REDFT01, [1:length(cdim);])
 	Flist  = zeros(niter); Clist = zeros(niter); Ilist = zeros(niter);
 
   # define proximal operators (shorten the code)

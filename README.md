@@ -12,3 +12,6 @@ and see the associated notebooks for a simple overview.
 
 Available soon:
 - extension to Riemannian manifolds
+
+
+Update 2015-10-21: 2D examples in the paper has been added. 

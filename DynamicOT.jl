@@ -155,14 +155,14 @@ end #proxFunctional!
 ################################################
 # Solves the poisson equation with Dirichlet conditions
 ################################################
-@doc """
+"""
        solves Δu + f = 0
        Neumann on the staggered grid -> use  DCT II / DCT III
        because x(-1/2)=x(N+1/2)=0
 	     with the contraints: mean(u-f)=0 and 0 boundary cond.
 	     if withmu: solves instead   Δu -u + f =0
 	     plan /iplan are "prepared" DCT! (for speed)
-""" ->
+"""
 function poisson!(f::Array{Float64}, lengths::Array{Float64},
                 source::Bool,
                 plan="none", iplan="none")

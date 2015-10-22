@@ -15,14 +15,6 @@ Available soon:
 
 ## How to run
 Update 2015-10-21: 2D examples in the paper has been added. 
-```julia
-include("Grids.jl")
-include("DynamicOT.jl")
-using Images, DynamicOT
-p0=1-data(float(imread("p0.png")));
-p1=1-data(float(imread("p1.png")));
-T=12 # time ticks
-result=solveGeodesic(p0, p1, T, δ=0.4/pi);
-interp=max(0,1-reshape(result[1].ρ[round(T/2)+1,:,:],size(p0)));
-imwrite(grayim(interp), "pmid.png")
+```bash
+julia demo.ji p0 p1 12 0.4
 ```

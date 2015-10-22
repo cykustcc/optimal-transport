@@ -306,8 +306,8 @@ function evalFunctional(V::Centered;
         V.source ? fq = abs(V.ζ[i])^q/q : fq = 0.0;
         f[i] = fp/V.ρ[i]^(p-1) + δ^p * fq/V.ρ[i]^(q-1)
       end
-        F = sum(f)*prod(V.lengths)/prod(V.cdim)
     end
+    F = sum(f)*prod(V.lengths)/prod(V.cdim)
   end
 
   if isequal(method,"L2") # not used
@@ -322,8 +322,8 @@ function evalFunctional(V::Centered;
         end
         f[i] = fp/V.ρ[i] + δ^2 * V.ζ[i]^2/2
       end
-        F = sum(f)*prod(V.lengths)/prod(V.cdim)
     end
+    F = sum(f)*prod(V.lengths)/prod(V.cdim)
   end
 
   return F

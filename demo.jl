@@ -19,8 +19,8 @@ end
 if length(ARGS) > 4
   midFrame=ARGS[5];
   mid=data(float(imread("$midFrame.png")));
-  estmid=min(1, reshape(result[1].ρ[round(T/2) + 1,:,:],size(p0)));
-  err = sqrt(mean((mid - estmid)^2));
+  estmid=min(1, reshape(result[1].ρ[round(Int, T/2) + 1,:,:],size(p0)));
+  err = sqrt(mean((mid - estmid).^2));
   @show err
 end
 

@@ -1,11 +1,11 @@
 include("Grids.jl")
 include("DynamicOT.jl")
-using Images, DynamicOT, MAT
+using Images, Colors, FixedPointNumbers, DynamicOT, MAT
 firstFrame=ARGS[1];
 secondFrame=ARGS[2];
 
-p0=float(data(imread("$firstFrame.png")));
-p1=float(data(imread("$secondFrame.png")));
+p0=float(data(convert(Image{Gray}, imread("$firstFrame.png"))));
+p1=float(data(convert(Image{Gray}, imread("$secondFrame.png"))));
 T=parse(ARGS[3]) # time ticks
 result=solveGeodesic(p0, p1, T, δ=float(ARGS[4])/pi);
 

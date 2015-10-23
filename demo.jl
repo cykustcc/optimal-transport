@@ -4,8 +4,8 @@ using Images, DynamicOT, MAT
 firstFrame=ARGS[1];
 secondFrame=ARGS[2];
 
-p0=data(float(imread("$firstFrame.png")));
-p1=data(float(imread("$secondFrame.png")));
+p0=float(data(imread("$firstFrame.png")));
+p1=float(data(imread("$secondFrame.png")));
 T=parse(ARGS[3]) # time ticks
 result=solveGeodesic(p0, p1, T, δ=float(ARGS[4])/pi);
 

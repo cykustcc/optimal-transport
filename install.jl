@@ -1,4 +1,5 @@
 Pkg.add("Images")
+Pkg.build("HDF5")
 Pkg.add("HDF5")
 Pkg.add("MAT")
 Pkg.update()

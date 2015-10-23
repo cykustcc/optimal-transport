@@ -17,6 +17,6 @@ Available soon:
 Update 2015-10-21: 2D examples in the paper has been added. 
 ```bash
 $ julia install.jl
-$ julia demo.ji p0 p1 12 0.4
-$ julia demo.ji ot0 ot1 12 0.2
+$ julia demo.jl p0 p1 12 0.4
+$ julia demo.jl ot0 ot1 12 0.2
 ```

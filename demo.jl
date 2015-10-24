@@ -18,7 +18,7 @@ end
 ## compute estimation error if the ground-truth frame is given
 if length(ARGS) > 4
   midFrame=ARGS[5];
-  mid=data(float(imread("$midFrame.png")));
+  mid=float(data(convert(Image{Gray}, imread("$midFrame.png"))));
   estmid=min(1, reshape(result[1].ρ[round(Int, T/2) + 1,:,:],size(p0)));
   err_msqr = sqrt(mean((mid - estmid).^2));
   err_mabs = mean(abs(mid-estmid))
@@ -30,8 +30,7 @@ end
 matwrite("$firstFrame-data.mat", Dict{Any,Any}(
            "mass" => result[1].ρ,
            "momentum" => result[1].ω,
-           "source" => result[1].ζ
-           ))
+           "source" => result[1].ζ))
 
 ## write flows
 width=size(p0)[1];

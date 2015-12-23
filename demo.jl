@@ -13,7 +13,7 @@ p1=float(data(convert(Image{Gray}, load("$secondFrame.png"))));
 T=parse(ARGS[3]) # time ticks
 result=solveGeodesic(p0, p1, T, δ=float(ARGS[4])/pi);
 
-t=T/2;
+t=round((T+1)/2);
 U=result[1];
 ζ = reshape(U.ζ[t,:],U.cdim[2:end]...);
 #imshow(ζ,cmap="bwr",vmin=-.05, vmax=.05);
@@ -45,9 +45,9 @@ matwrite("$firstFrame-data.mat", Dict{Any,Any}(
 ## write flows
 width=size(p0)[1];
 height=size(p0)[2];
-ρ=reshape(result[1].ρ[round(Int, T/2)+1,:,:], size(p0));
-ω1=result[1].ω[1][round(Int, T/2)+1,:,:];
-ω2=result[1].ω[2][round(Int, T/2)+1,:,:];
+ρ=reshape(result[1].ρ[t,:,:], size(p0));
+ω1=result[1].ω[1][t,:,:];
+ω2=result[1].ω[2][t,:,:];
 ω1=reshape(ω1, (width+1, height));
 ω2=reshape(ω2, (width, height+1));
 f=open("$firstFrame-flow.flo", "w");

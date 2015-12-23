@@ -1,14 +1,23 @@
 include("Grids.jl")
 include("DynamicOT.jl")
-using QuartzImageIO, Images, Colors, FixedPointNumbers, DynamicOT, MAT
+using Images, Colors, FixedPointNumbers, DynamicOT, MAT, PyPlot
 firstFrame=ARGS[1];
 secondFrame=ARGS[2];
 
 p0=float(data(convert(Image{Gray}, load("$firstFrame.png"))));
 p1=float(data(convert(Image{Gray}, load("$secondFrame.png"))));
 
+@show sum(p0)
+@show sum(p1)
+
 T=parse(ARGS[3]) # time ticks
 result=solveGeodesic(p0, p1, T, δ=float(ARGS[4])/pi);
+
+t=T/2;
+U=result[1];
+ζ = reshape(U.ζ[t,:],U.cdim[2:end]...);
+#imshow(ζ,cmap="bwr",vmin=-.05, vmax=.05);
+imsave("circle_$(firstFrame)",transpose(ζ),cmap="bwr",vmin=-.05, vmax=.05);
 
 ## write interpolating frames
 #for i=1:(T+1)
@@ -29,9 +38,9 @@ end
 
 ## write out data
 matwrite("$firstFrame-data.mat", Dict{Any,Any}(
-           "mass" => result[1].ρ,
-           "momentum" => result[1].ω,
-           "source" => result[1].ζ))
+           "mass" => U.ρ,
+           "momentum" => U.ω,
+           "source" => U.ζ))
 
 ## write flows
 width=size(p0)[1];

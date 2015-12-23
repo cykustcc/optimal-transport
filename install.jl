@@ -1,4 +1,5 @@
 Pkg.add("Images")
+Pkg.add("QuartzImageIO")
 Pkg.add("Colors")
 Pkg.add("FixedPointNumbers")
 #Pkg.build("HDF5")

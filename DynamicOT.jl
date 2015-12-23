@@ -422,8 +422,8 @@ function solveGeodesic(ρ_0, ρ_1, T;
   dimΩ = length(size(ρ_0))
   p = order[1]
   q = order[2]
-  ρ_0 = float64(ρ_0)
-  ρ_1 = float64(ρ_1)
+  ρ_0 = map(Float64, ρ_0)
+  ρ_1 = map(Float64, ρ_1)
 
   if q==0
     println("Computing geodesic for standard optimal transport...")

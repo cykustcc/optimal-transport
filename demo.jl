@@ -1,24 +1,25 @@
 include("Grids.jl")
 include("DynamicOT.jl")
-using Images, Colors, FixedPointNumbers, DynamicOT, MAT
+using QuartzImageIO, Images, Colors, FixedPointNumbers, DynamicOT, MAT
 firstFrame=ARGS[1];
 secondFrame=ARGS[2];
 
-p0=float(data(convert(Image{Gray}, imread("$firstFrame.png"))));
-p1=float(data(convert(Image{Gray}, imread("$secondFrame.png"))));
+p0=float(data(convert(Image{Gray}, load("$firstFrame.png"))));
+p1=float(data(convert(Image{Gray}, load("$secondFrame.png"))));
+
 T=parse(ARGS[3]) # time ticks
 result=solveGeodesic(p0, p1, T, δ=float(ARGS[4])/pi);
 
 ## write interpolating frames
-for i=1:(T+1)
-    interp=min(1,reshape(result[1].ρ[i,:,:],size(p0)));
-    imwrite(grayim(interp), "$firstFrame-$i.png")
-end
+#for i=1:(T+1)
+#    interp=min(1,reshape(result[1].ρ[i,:,:],size(p0)));
+#    imwrite(grayim(interp), "$firstFrame-$i.png")
+#end
 
 ## compute estimation error if the ground-truth frame is given
 if length(ARGS) > 4
   midFrame=ARGS[5];
-  mid=float(data(convert(Image{Gray}, imread("$midFrame.png"))));
+  mid=float(data(convert(Image{Gray}, load("$midFrame.png"))));
   estmid=min(1, reshape(result[1].ρ[round(Int, T/2) + 1,:,:],size(p0)));
   err_msqr = sqrt(mean((mid - estmid).^2));
   err_mabs = mean(abs(mid-estmid))

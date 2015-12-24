@@ -7,6 +7,10 @@ secondFrame=ARGS[2];
 p0=float(data(convert(Image{Gray}, load("$firstFrame.png"))));
 p1=float(data(convert(Image{Gray}, load("$secondFrame.png"))));
 
+## Get the file name part of pathes
+firstFrame=basename(firstFrame);
+secondFrame=basename(secondFrame);
+
 @show sum(p0)
 @show sum(p1)
 

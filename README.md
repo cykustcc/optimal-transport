@@ -5,7 +5,7 @@ This Julia toolbox solves the dynamical optimal transport problem and various ex
 - an interpolation between W1 and Fisher-Rao;
 - and of course standard Wasserstein distances (1,2);
 
-Check the associated article where the mathematical frawmework is described:
+Check the associated article where the mathematical framework is described:
 http://arxiv.org/abs/1506.06430
 
 and see the associated notebooks for a simple overview.

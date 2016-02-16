@@ -1,4 +1,5 @@
 Pkg.add("Images")
+Pkg.add("PyPlot") 
 Pkg.add("ImageMagick")
 Pkg.add("QuartzImageIO")
 Pkg.add("Colors")

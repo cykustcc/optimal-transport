@@ -57,6 +57,7 @@ matwrite("$(dir)$firstFrame-data.mat", Dict{Any,Any}(
 width=size(p0)[1];
 height=size(p0)[2];
 ρ=reshape(result[1].ρ[t,:,:], size(p0));
+ρ=max(ρ,ones(width,height)*1.0/255);
 ω1=result[1].ω[1][t,:,:];
 ω2=result[1].ω[2][t,:,:];
 ω1=reshape(ω1, (width+1, height));
@@ -69,6 +70,20 @@ for j=1:height
   for i=1:width
     u=(ω1[i,j]+ω1[i+1,j])/2.;
     v=(ω2[i,j]+ω2[i,j+1])/2.;
+    write(f, Float32(u));
+    write(f, Float32(v));
+  end
+end
+close(f)
+
+f=open("$(dir)$firstFrame-velocity.flo", "w");
+write(f, "PIEH");
+write(f, Int32(width));
+write(f, Int32(height));
+for j=1:height
+  for i=1:width
+    u=(ω1[i,j]+ω1[i+1,j])/2./ρ[i,j];
+    v=(ω2[i,j]+ω2[i,j+1])/2./ρ[i,j];
     write(f, Float32(u));
     write(f, Float32(v));
   end
